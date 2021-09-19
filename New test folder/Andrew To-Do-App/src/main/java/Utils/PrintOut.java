@@ -2,6 +2,8 @@ package Utils;
 
 import Structures.ToDoItem;
 
+import java.util.LinkedList;
+
 //Defined a class that prints strings to the console
 public class PrintOut {
     public void printOutString(String str) {
@@ -18,4 +20,9 @@ public class PrintOut {
         System.out.print("]");
         System.out.println(toDoItem.getToDoText());
     }
-}
+    public static void printList(LinkedList<ToDoItem> toDoList){
+        for (ToDoItem item:toDoList) {
+            PrintOut.printItem(item);
+        }
+        }
+    }
