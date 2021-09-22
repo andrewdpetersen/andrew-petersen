@@ -25,10 +25,10 @@ public class Driver {
         toDoItem2.setToDoText("item 2-complete? no!");
         toDoItem3.setComplete(true);
 
-        //Prints out the items to the console
-        PrintOut.printItem(toDoItem1);
-        PrintOut.printItem(toDoItem2);
-        PrintOut.printItem(toDoItem3);
+//        Prints out the items to the console
+//        PrintOut.printItem(toDoItem1);
+//        PrintOut.printItem(toDoItem2);
+//        PrintOut.printItem(toDoItem3);
 
         //Prints out the full list to the console
         PrintOut.printList((LinkedList<ToDoItem>) toDoItemList);

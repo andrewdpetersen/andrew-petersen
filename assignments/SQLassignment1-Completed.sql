@@ -182,17 +182,16 @@ WHERE name LIKE '%Smith';
 
 # Get the name and address of any customer with less than $50 in an account. (No duplicates!)
 
-SELECT c.name, ad.address, ad.city, ad.state, ad.zip, a.balance 
+SELECT c.name, ad.address, a.balance 
 FROM customers c
 JOIN address ad ON ad.address_id = c.address_id
 JOIN accounts_customers ac ON ac.customer_id = c.customer_id
 JOIN accounts a ON a.account_id = ac.account_id
-WHERE a.balance < 50;
-
+WHERE (a.balance < 50);
 
 # Get a list of all the customers who live in Texas.
 
-SELECT c.name
+SELECT c.name, a.state 
 FROM customers c
 JOIN address a ON c.address_id = a.address_id
 WHERE a.state = 'TX';
@@ -213,14 +212,14 @@ JOIN accounts_customers ac ON ac.account_id = a.account_id
 JOIN customers c ON c.customer_id = ac.customer_id
 JOIN address ad ON ad.address_id = c.address_id
 SET a.balance = (a.balance - 199.99)
-WHERE c.name = 'Jason Smith';
+WHERE c.name = 'Jason Smith' AND a.account_id =900001;
 
 UPDATE accounts a
 JOIN accounts_customers ac ON ac.account_id = a.account_id
 JOIN customers c ON c.customer_id = ac.customer_id
 JOIN address ad ON ad.address_id = c.address_id
 SET a.balance = (a.balance + 199.99)
-WHERE c.name = 'Amanda Smith';
+WHERE c.name = 'Amanda Smith' AND a.account_id =900003;
 
 # Change Amanda Smith's last name to "Lastname"
  
