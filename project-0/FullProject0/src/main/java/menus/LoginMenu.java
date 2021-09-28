@@ -44,6 +44,9 @@ public class LoginMenu {
                     //Bank portal
                     //Bank portal
                 }
+                else{
+                    System.out.print("Incorrect password");
+                }
             }
             else{
                 System.out.print("There is no user with that username!");
