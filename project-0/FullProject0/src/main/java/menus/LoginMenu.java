@@ -28,7 +28,7 @@ public class LoginMenu {
 
             MyArrayList<String> usernameList = new MyArrayList<>();
             int i=0;
-            while(i<userList.size()){
+            while(i<userList.size()-1){
                 usernameList.add(userList.get(i).getUsername());
                 i++;
             }
