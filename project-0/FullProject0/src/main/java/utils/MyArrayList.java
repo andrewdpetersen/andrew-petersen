@@ -26,7 +26,7 @@ public class MyArrayList<E> implements MyArrayListInterface<E> {
         Object[] arr = getArrayList();
         Object[] newArray = new Object[(arr.length)+2];
         int i = 0;
-        while(i<arr.length){
+        while(i<arr.length-1){
             newArray[i]=arr[i];
             i++;
         }
@@ -41,7 +41,7 @@ public class MyArrayList<E> implements MyArrayListInterface<E> {
         Object[] arrayList = getArrayList();
         if(index>=arrayList.length){
             Object[] newList = new Object[index+1];
-            for(int i=0;i< arrayList.length;i++){
+            for(int i=0;i< arrayList.length-1;i++){
                 newList[i] = arrayList[i];
             }
             newList[index] = ele;
@@ -85,7 +85,7 @@ public class MyArrayList<E> implements MyArrayListInterface<E> {
     @Override
     public void clear () {
         Object[] arr = getArrayList();
-        for(int i=0;i<arr.length;i++){
+        for(int i=0;i<arr.length-1;i++){
             remove(i);
         }
     }
@@ -94,8 +94,8 @@ public class MyArrayList<E> implements MyArrayListInterface<E> {
     public int find (E ele){
         Object[] arr = getArrayList();
         int i =0;
-        while(i<arr.length){
-            if(arr[i].equals(ele)){
+        while(i<arr.length-1){
+            if(ele.equals(arr[i])){
                 return i;
             }else{
                 i++;

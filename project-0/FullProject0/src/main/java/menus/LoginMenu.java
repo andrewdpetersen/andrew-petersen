@@ -29,7 +29,11 @@ public class LoginMenu {
             MyArrayList<String> usernameList = new MyArrayList<>();
             int i=0;
             while(i<userList.size()-1){
-                usernameList.add(userList.get(i).getUsername());
+                Users findTheUser = userList.get(i);
+                if(findTheUser!=null) {
+                    String addUserName = findTheUser.getUsername();
+                    usernameList.add(addUserName);
+                }
                 i++;
             }
 
@@ -39,17 +43,17 @@ public class LoginMenu {
                 String nameCheck = checkingUser.getUsername();
                 String passCheck = checkingUser.getPassword();
                 if(nameCheck.equals(usernameCheck) && passCheck.equals(passwordCheck)){
-                    System.out.print("This takes you to the Bank Portal");
+                    System.out.println("This takes you to the Bank Portal");
                     //Bank portal
                     //Bank portal
                     //Bank portal
                 }
                 else{
-                    System.out.print("Incorrect password");
+                    System.out.println("Incorrect password");
                 }
             }
             else{
-                System.out.print("There is no user with that username!");
+                System.out.println("There is no user with that username!");
             }
         }
         catch (SQLException | IOException e){
