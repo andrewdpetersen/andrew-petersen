@@ -1,6 +1,7 @@
 package menus.validuser;
 
 import DAOs.AccountsDAO;
+import menus.OuterMenu;
 import models.Accounts;
 import models.Users;
 import utils.ConnectionManager;
@@ -9,6 +10,7 @@ import utils.MyArrayList;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 public class AccountOverview {
     public void accountOverview(Users user) throws SQLException, IOException {
@@ -32,8 +34,23 @@ public class AccountOverview {
         System.out.println("The total balance of all your accounts is: $"+
                 String.valueOf(totalBalance));
 
-        //code here to go back to BankMenu
-        //code here to go into AccountView
-        //code here to logout
+        Scanner overviewScanner = new Scanner(System.in);
+        System.out.println("What would you like to do?\n" +
+                "(1) View details for one of my accounts\n" +
+                "(2) Go back to the Bank Menu\n" +
+                "(3) Logout");
+
+        String overviewMenu = overviewScanner.nextLine();
+        switch(overviewMenu){
+            case "1":
+                new AccountView().accountView(user);
+                break;
+            case "2":
+                new BankMenu().bankMenu(user);
+                break;
+            case "3":
+                new OuterMenu().OuterMenu();
+                break;
+        }
     }
 }
