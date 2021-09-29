@@ -4,9 +4,6 @@ import menus.OuterMenu;
 
 import models.Users;
 
-
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.Scanner;
 
 public class BankMenu{
