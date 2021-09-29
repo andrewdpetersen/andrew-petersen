@@ -97,7 +97,7 @@ public class AccountMenu {
             case "3":
 
                 //run transfer script
-                
+
                 break;
             case "4":
                 new BankMenu().bankMenu(user);
