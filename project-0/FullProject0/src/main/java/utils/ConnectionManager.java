@@ -7,18 +7,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-/**
- *
- *
- */
+
 public class ConnectionManager {
     private static Connection conn;
 
     private ConnectionManager() {
 
     }
-
-
 
     /*
     This is a static method for returning a connection in the factory singleton design pattern
