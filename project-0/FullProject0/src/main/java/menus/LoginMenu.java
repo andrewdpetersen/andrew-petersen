@@ -44,13 +44,7 @@ public class LoginMenu {
                 String nameCheck = checkingUser.getUsername();
                 String passCheck = checkingUser.getPassword();
                 if(nameCheck.equals(usernameCheck) && passCheck.equals(passwordCheck)){
-                    System.out.println("This takes you to the Bank Portal");
-
                     new BankMenu().bankMenu(checkingUser);
-
-                    //Bank portal
-                    //Bank portal
-                    //Bank portal
                 }
                 else{
                     System.out.println("Incorrect password");
