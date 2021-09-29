@@ -1,6 +1,7 @@
 package menus;
 
 import DAOs.UsersDAO;
+import menus.validuser.BankMenu;
 import models.Users;
 import utils.ConnectionManager;
 import utils.MyArrayList;
@@ -44,6 +45,9 @@ public class LoginMenu {
                 String passCheck = checkingUser.getPassword();
                 if(nameCheck.equals(usernameCheck) && passCheck.equals(passwordCheck)){
                     System.out.println("This takes you to the Bank Portal");
+
+                    new BankMenu().bankMenu(checkingUser);
+
                     //Bank portal
                     //Bank portal
                     //Bank portal

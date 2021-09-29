@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import models.Accounts;
+import utils.MyArrayList;
 
 public class AccountsDAO {
     private Connection conn;
@@ -57,13 +58,13 @@ public class AccountsDAO {
         return getAccount;
     }
 
-    public ArrayList<Accounts> getAllAccounts() throws SQLException {
+    public MyArrayList<Accounts> getAllAccounts() throws SQLException {
         //returns a list of all the accounts table
         String sqlGetAll = "SELECT * FROM accounts";
         PreparedStatement prepGetAll = conn.prepareStatement(sqlGetAll);
         ResultSet getAll = prepGetAll.executeQuery();
 
-        ArrayList<Accounts> fullAccountsList = new ArrayList<>();
+        MyArrayList<Accounts> fullAccountsList = new MyArrayList<>();
         while(getAll.next()){
             Accounts nextAccount = new Accounts();
             nextAccount.setAccount_id(getAll.getInt(1));
@@ -75,14 +76,14 @@ public class AccountsDAO {
         return fullAccountsList;
     }
 
-    public ArrayList<Accounts> getAccountsByUser(int user_id) throws SQLException {
+    public MyArrayList<Accounts> getAccountsByUser(int user_id) throws SQLException {
         //returns all the accounts from a given user
         String sqlGet = "SELECT * FROM accounts WHERE user_id = ?";
         PreparedStatement prepGet = conn.prepareStatement(sqlGet);
         prepGet.setInt(1,user_id);
         ResultSet getAccountByUser = prepGet.executeQuery();
 
-        ArrayList<Accounts> userAccountsList = new ArrayList<>();
+        MyArrayList<Accounts> userAccountsList = new MyArrayList<>();
 
         while(getAccountByUser.next()){
             Accounts nextUserAccount = new Accounts();

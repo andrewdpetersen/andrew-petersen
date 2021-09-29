@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import models.Transactions;
+import utils.MyArrayList;
 
 public class TransactionsDAO {
     private Connection conn;
@@ -70,13 +71,13 @@ public class TransactionsDAO {
         return newTransaction;
     }
 
-    public ArrayList<Transactions> getAllTransactions() throws SQLException {
+    public MyArrayList<Transactions> getAllTransactions() throws SQLException {
         //returns all transactions
         String sqlAllTrans = "SELECT * FROM transactions";
         PreparedStatement prepAllTrans = conn.prepareStatement(sqlAllTrans);
         ResultSet allTransactions = prepAllTrans.executeQuery();
 
-        ArrayList<Transactions> transactionList = new ArrayList<>();
+        MyArrayList<Transactions> transactionList = new MyArrayList<>();
         while(allTransactions.next()){
             Transactions nextTransaction = new Transactions();
             nextTransaction.setTransaction_id(allTransactions.getInt(1));
@@ -92,14 +93,14 @@ public class TransactionsDAO {
         return transactionList;
     }
 
-    public ArrayList<Transactions> getAllAccountTransactions(int account_id) throws SQLException {
+    public MyArrayList<Transactions> getAllAccountTransactions(int account_id) throws SQLException {
         //returns all transactions for a given account
         String sqlAccountTrans = "SELECT * FROM transactions WHERE account_id = ?";
         PreparedStatement prepAccountTrans = conn.prepareStatement(sqlAccountTrans);
         prepAccountTrans.setInt(1,account_id);
         ResultSet allAccountTrans = prepAccountTrans.executeQuery();
 
-        ArrayList<Transactions> accountTransactions = new ArrayList<>();
+        MyArrayList<Transactions> accountTransactions = new MyArrayList<>();
         while(allAccountTrans.next()){
             Transactions nextTransaction = new Transactions();
             nextTransaction.setTransaction_id(allAccountTrans.getInt(1));
