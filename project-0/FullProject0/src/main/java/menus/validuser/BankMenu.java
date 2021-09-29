@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class BankMenu{
-    public void bankMenu(Users user) throws SQLException, IOException {
+    public void bankMenu(Users user){
         boolean validUser =true;
         //MENU OPTIONS
         while(validUser){
