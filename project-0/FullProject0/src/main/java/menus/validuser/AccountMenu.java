@@ -46,23 +46,27 @@ public class AccountMenu {
                 Scanner depositScanner = new Scanner(System.in);
                 System.out.println("How much would you like to deposit?");
                 float depositAmount = Float.parseFloat(depositScanner.nextLine());
+                if(depositAmount>=0){
+                    try{
+                        Connection conn = ConnectionManager.getConnection();
+                        AccountsDAO accountListDAO = new AccountsDAO(conn);
 
-                try{
-                    Connection conn = ConnectionManager.getConnection();
-                    AccountsDAO accountListDAO = new AccountsDAO(conn);
+                        Accounts featureAccount = accountListDAO.getAccountById(account_id);
 
-                    Accounts featureAccount = accountListDAO.getAccountById(account_id);
+                        float oldBalance = featureAccount.getBalance();
+                        float newBalance = oldBalance+depositAmount;
+                        featureAccount.setBalance(newBalance);
 
-                    float oldBalance = featureAccount.getBalance();
-                    float newBalance = oldBalance+depositAmount;
-                    featureAccount.setBalance(newBalance);
+                        accountListDAO.updateAccounts(featureAccount);
 
-                    accountListDAO.updateAccounts(featureAccount);
-
-                    new AccountMenu().accountMenu(user,account_id);
+                        new AccountMenu().accountMenu(user,account_id);
+                    }
+                    catch (SQLException|IOException e){
+                        e.printStackTrace();
+                    }
                 }
-                catch (SQLException|IOException e){
-                    e.printStackTrace();
+                else{
+                    System.out.println("You cannot make a negative deposit");
                 }
                 break;
 
@@ -73,22 +77,27 @@ public class AccountMenu {
                 System.out.println("How much would you like to withdraw?");
                 float withdrawalAmount = Float.parseFloat(withdrawalScanner.nextLine());
 
-                try{
-                    Connection conn = ConnectionManager.getConnection();
-                    AccountsDAO accountListDAO = new AccountsDAO(conn);
+                if(withdrawalAmount>=0) {
 
-                    Accounts featureAccount = accountListDAO.getAccountById(account_id);
 
-                    float oldBalance = featureAccount.getBalance();
-                    float newBalance = oldBalance-withdrawalAmount;
-                    featureAccount.setBalance(newBalance);
+                    try {
+                        Connection conn = ConnectionManager.getConnection();
+                        AccountsDAO accountListDAO = new AccountsDAO(conn);
 
-                    accountListDAO.updateAccounts(featureAccount);
+                        Accounts featureAccount = accountListDAO.getAccountById(account_id);
 
-                    new AccountMenu().accountMenu(user,account_id);
-                }
-                catch (SQLException|IOException e){
-                    e.printStackTrace();
+                        float oldBalance = featureAccount.getBalance();
+                        float newBalance = oldBalance - withdrawalAmount;
+                        featureAccount.setBalance(newBalance);
+
+                        accountListDAO.updateAccounts(featureAccount);
+
+                        new AccountMenu().accountMenu(user, account_id);
+                    } catch (SQLException | IOException e) {
+                        e.printStackTrace();
+                    }
+                }else{
+                    System.out.println("You cannot make a negative withdrawal");
                 }
                 break;
 
