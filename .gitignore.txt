@@ -1,1 +1,4 @@
 *.properties
+*.iml
+.idea/
+.target/
