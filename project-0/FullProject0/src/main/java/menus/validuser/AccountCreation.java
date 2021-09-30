@@ -45,5 +45,7 @@ public class AccountCreation {
         catch(SQLException | IOException e){
             e.printStackTrace();
         }
+
+        new BankMenu().bankMenu(user);
     }
 }
