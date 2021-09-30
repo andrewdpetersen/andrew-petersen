@@ -25,23 +25,25 @@ public class AccountView {
 
             MyArrayList<Integer> idList = new MyArrayList<>();
 
-            System.out.print("Which account would you like to view, please type the number inside the ():");
+            System.out.println("Which account would you like to view, please type the number inside the ():");
             int i = 0;
-            while (i < accountList.size() - 1) {
+            while (i < accountList.size()) {
                 Accounts tempAccount = accountList.get(i);
-                idList.add(tempAccount.getAccount_id());
-                System.out.println("(" + tempAccount.getAccount_id() + ")" +
-                        "; Type: " + tempAccount.getAccount_type() + "; " +
-                        "Balance: $" + String.valueOf(tempAccount.getBalance()));
+                if (tempAccount != null) {
+                    idList.add(tempAccount.getAccount_id());
+                    System.out.println("(" + tempAccount.getAccount_id() + ")" +
+                            "; Type: " + tempAccount.getAccount_type() + "; " +
+                            "Balance: $" + tempAccount.getBalance());
+                }
                 i++;
             }
             String chooseAccount = accountScanner.nextLine();
-            int s =0;
-            while(s<idList.size()-1){
-                if(chooseAccount.equals(s)){
+            int s = 0;
+            while (s < idList.size() - 1) {
+                if (chooseAccount.equals(s)) {
                     new AccountMenu().accountMenu(user, s);
                 }
-                //else- invalid selection
+                    //else- invalid selection
             }
         }
         catch (SQLException|IOException e){

@@ -26,12 +26,14 @@ public class AccountOverview {
 
             int i = 0;
             float totalBalance = 0.0f;
-            while (i < accountList.size() - 1) {
+            while (i < accountList.size()) {
                 Accounts tempAccount = accountList.get(i);
-                System.out.println("Account ID: " + tempAccount.getAccount_id() + "\n" +
-                        "Account Type: " + tempAccount.getAccount_type() + "\n" +
-                        "Balance: " + String.valueOf(tempAccount.getBalance()));
-                totalBalance += tempAccount.getBalance();
+                if(tempAccount!=null) {
+                    System.out.println("Account ID: " + tempAccount.getAccount_id() + "\n" +
+                            "Account Type: " + tempAccount.getAccount_type() + "\n" +
+                            "Balance: " + String.valueOf(tempAccount.getBalance()));
+                    totalBalance += tempAccount.getBalance();
+                }
                 i++;
             }
             System.out.println("The total balance of all your accounts is: $" +
