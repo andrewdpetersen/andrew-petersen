@@ -14,6 +14,8 @@ import java.util.Scanner;
 public class AccountMenu {
     public void accountMenu(Users user, int account_id){
 
+
+
         try {
             Connection conn = ConnectionManager.getConnection();
             AccountsDAO accountListDAO = new AccountsDAO(conn);
@@ -24,20 +26,18 @@ public class AccountMenu {
             System.out.println("Account Type: " + featureAccount.getAccount_type());
             System.out.println("Balance: $"+ featureAccount.getBalance());
             System.out.println("User ID: "+featureAccount.getUser_id());
-
-            conn.close();
         }
         catch(SQLException | IOException e){
             e.printStackTrace();
         }
 
         Scanner choiceScanner = new Scanner(System.in);
-        System.out.println("Please make a selection to continue:\n" +
-                "(1) Deposit funds into this account\n" +
+        System.out.println("(1) Deposit funds into this account\n" +
                 "(2) Withdraw funds from this account\n" +
                 "(3) Transfer funds from this account to a different account\n" +
                 "(4) Return to Bank Menu\n" +
-                "(5) Logout");
+                "(5) Logout\n" +
+                "Please make a selection to continue:");
         String choice = choiceScanner.nextLine();
 
         switch(choice){
@@ -45,7 +45,7 @@ public class AccountMenu {
                 //run deposit script
                 Scanner depositScanner = new Scanner(System.in);
                 System.out.println("How much would you like to deposit?");
-                float depositAmmount = Float.parseFloat(depositScanner.nextLine());
+                float depositAmount = Float.parseFloat(depositScanner.nextLine());
 
                 try{
                     Connection conn = ConnectionManager.getConnection();
@@ -54,11 +54,10 @@ public class AccountMenu {
                     Accounts featureAccount = accountListDAO.getAccountById(account_id);
 
                     float oldBalance = featureAccount.getBalance();
-                    float newBalance = oldBalance+depositAmmount;
+                    float newBalance = oldBalance+depositAmount;
                     featureAccount.setBalance(newBalance);
 
                     accountListDAO.updateAccounts(featureAccount);
-                    conn.close();
 
                     new AccountMenu().accountMenu(user,account_id);
                 }
@@ -71,8 +70,8 @@ public class AccountMenu {
 
                 //run withdrawal script
                 Scanner withdrawalScanner = new Scanner(System.in);
-                System.out.println("How much would you like to deposit?");
-                float withdrawalAmmount = Float.parseFloat(withdrawalScanner.nextLine());
+                System.out.println("How much would you like to withdraw?");
+                float withdrawalAmount = Float.parseFloat(withdrawalScanner.nextLine());
 
                 try{
                     Connection conn = ConnectionManager.getConnection();
@@ -81,11 +80,10 @@ public class AccountMenu {
                     Accounts featureAccount = accountListDAO.getAccountById(account_id);
 
                     float oldBalance = featureAccount.getBalance();
-                    float newBalance = oldBalance-withdrawalAmmount;
+                    float newBalance = oldBalance-withdrawalAmount;
                     featureAccount.setBalance(newBalance);
 
                     accountListDAO.updateAccounts(featureAccount);
-                    conn.close();
 
                     new AccountMenu().accountMenu(user,account_id);
                 }

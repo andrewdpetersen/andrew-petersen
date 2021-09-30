@@ -31,30 +31,30 @@ public class AccountsDAO {
             prepNewAccount.executeUpdate();
         }
         else{
-            String sqlAccountType = "UPDATE accounts SET account_type = ?;";
-            String sqlBalance = "UPDATE accounts SET balance = ?;";
-            String sqlUser_id = "UPDATE accounts SET user_id = ?;";
+            String sqlUpdate = "UPDATE accounts SET account_type=?, " +
+                    "balance=?, user_id=? WHERE account_id = ?;";
 
-            String sqlUpdateAll = sqlAccountType+sqlBalance+sqlUser_id;
-            PreparedStatement prepUpdateAll = conn.prepareStatement(sqlUpdateAll);
+            PreparedStatement prepUpdateAll = conn.prepareStatement(sqlUpdate);
             prepUpdateAll.setString(1,account.getAccount_type());
             prepUpdateAll.setFloat(2,account.getBalance());
             prepUpdateAll.setInt(3,account.getUser_id());
+            prepUpdateAll.setInt(4,account.getAccount_id());
             prepUpdateAll.executeUpdate();
         }
     }
 
-    public Accounts getAccountById(int account_id) throws SQLException{
+    public Accounts getAccountById(int account_id) throws SQLException {
         String sqlGet = "SELECT * FROM accounts WHERE account_id = ?";
         PreparedStatement prepGet = conn.prepareStatement(sqlGet);
-        prepGet.setInt(1,account_id);
-        ResultSet resultGet = prepGet.executeQuery();
-
+        prepGet.setInt(1, account_id);
+        ResultSet results = prepGet.executeQuery();
         Accounts getAccount = new Accounts();
-        getAccount.setAccount_id(resultGet.getInt(1));
-        getAccount.setAccount_type(resultGet.getString(2));
-        getAccount.setBalance(resultGet.getFloat(3));
-        getAccount.setUser_id(resultGet.getInt(4));
+        if (results.next()) {
+            getAccount.setAccount_id(account_id);
+            getAccount.setAccount_type(results.getString(2));
+            getAccount.setBalance(results.getFloat(3));
+            getAccount.setUser_id(results.getInt(4));
+        }
         return getAccount;
     }
 

@@ -61,6 +61,7 @@ public class UsersDAO {
             PreparedStatement sqlPstmt = conn.prepareStatement(sqlQuery);
             sqlPstmt.setInt(1, user_id);
             ResultSet results = sqlPstmt.executeQuery();
+
             Users user = new Users();
             user.setUser_id(user_id);
             user.setUsername(results.getString(2));
