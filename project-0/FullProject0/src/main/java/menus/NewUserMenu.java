@@ -44,11 +44,11 @@ public class NewUserMenu extends CallAndResponse implements EmailFormat, NameFor
 
         if(!goodEmail){
             System.out.println("The email you entered is not in a valid email format");
-        }
+        }else
 
-        //Name validation using regex in the NameFormat interface
+            //Name validation using regex in the NameFormat interface
 
-        if(!goodFirstName|!goodLastName){
+            if(!goodFirstName|!goodLastName){
             System.out.println("Please make sure you are typing your name without any numbers" +
                     "or special characters.");
         }
