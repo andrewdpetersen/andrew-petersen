@@ -1,10 +1,10 @@
 package utils;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
+import utils.formatValidation.CurrencyFormat;
+
 import java.util.Scanner;
 
-public class CallAndResponse extends CurrencyFormat{
+public class CallAndResponse extends CurrencyFormat {
 
     public String callAndResponse(String call){
         Scanner getResponse = new Scanner(System.in);
