@@ -7,11 +7,10 @@ import java.util.Scanner;
 
 public class CallAndResponse extends CurrencyFormat {
 
-    public String callAndResponse(String call){
+    public String caller(String call){
         Scanner getResponse = new Scanner(System.in);
         System.out.println(call);
         String response = getResponse.nextLine();
-        getResponse.close();
         return response;
     }
 

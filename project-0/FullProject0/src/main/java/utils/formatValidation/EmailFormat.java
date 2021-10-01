@@ -3,9 +3,9 @@ package utils.formatValidation;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class EmailFormat {
+public interface EmailFormat {
 
-    public boolean emailChecker(String email){
+    default boolean emailChecker(String email){
         //something@something.***
 
         Pattern emailPattern = Pattern.compile("^([-a-zA-Z0-9_.]+[@][-a-zA-Z0-9_]+[.][a-zA-Z]{3})$");
