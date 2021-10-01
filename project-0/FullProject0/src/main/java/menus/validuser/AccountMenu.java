@@ -18,7 +18,7 @@ import java.text.ParseException;
 import java.util.Scanner;
 
 public class AccountMenu extends CurrencyFormat {
-    public void accountMenu(Users user, int account_id){
+    public void accountMenu(Users user, int account_id) {
 
 
 
@@ -150,7 +150,68 @@ public class AccountMenu extends CurrencyFormat {
             case "3":
 
                 //run transfer script
+                Scanner transferScanner = new Scanner(System.in);
+                System.out.println("How much would you like to transfer?");
+                float transferAmount = Float.parseFloat(transferScanner.nextLine());
+                try {
+                    if (transferAmount >= 0) {
+                        //find the account you wish to transfer to and set up the transfer
+                        Connection conn = ConnectionManager.getConnection();
+                        AccountsDAO transferFinder = new AccountsDAO(conn);
 
+                        Accounts fromAccount = transferFinder.getAccountById(account_id);
+
+                        System.out.println("What is the account ID of the account you " +
+                                "want to transfer the funds into:");
+                        int toAccountId = Integer.parseInt(transferScanner.nextLine());
+
+                        Accounts toAccount = transferFinder.getAccountById(toAccountId);
+
+                        //do the transfer
+
+                        if (transferAmount <= fromAccount.getBalance()) {
+                            float oldFromBalance = fromAccount.getBalance();
+                            float newFromBalance = oldFromBalance - transferAmount;
+                            float oldToBalance = toAccount.getBalance();
+                            float newToBalance = oldToBalance + transferAmount;
+
+                            toAccount.setBalance(newToBalance);
+                            transferFinder.updateAccounts(toAccount);
+
+                            fromAccount.setBalance(newFromBalance);
+                            transferFinder.updateAccounts(fromAccount);
+
+                            TransactionsDAO updateTransTable = new TransactionsDAO(conn);
+
+                            Transactions transferFrom = new Transactions();
+                            transferFrom.setAccount_id(account_id);
+                            transferFrom.setWithdrawal(false);
+                            transferFrom.setDeposit(false);
+                            transferFrom.setTransfer(true);
+                            transferFrom.setTransfer_to_account_id(toAccountId);
+                            transferFrom.setTransaction_amount(transferAmount);
+                            updateTransTable.updateTransaction(transferFrom);
+
+                            Transactions transferTo = new Transactions();
+                            transferTo.setAccount_id(toAccountId);
+                            transferTo.setDeposit(false);
+                            transferTo.setWithdrawal(false);
+                            transferTo.setTransfer(true);
+                            transferTo.setTransfer_to_account_id(toAccountId);
+                            transferTo.setTransaction_amount(transferAmount);
+                            updateTransTable.updateTransaction(transferTo);
+
+
+                        } else {
+                            System.out.println("You cannot transfer more funds than you have");
+                        }
+
+                    } else {
+                        System.out.println("You cannot make a negative transfer");
+                    }
+                }catch(SQLException|IOException e){
+                    e.printStackTrace();
+                }
                 break;
             case "4":
 
