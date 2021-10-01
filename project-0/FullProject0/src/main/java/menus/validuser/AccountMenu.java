@@ -79,9 +79,10 @@ public class AccountMenu extends CurrencyFormat {
                 System.out.println("How much would you like to withdraw?");
                 float withdrawalAmount = Float.parseFloat(withdrawalScanner.nextLine());
 
+                //verifying the withdrawal is not negative
                 if(withdrawalAmount>=0) {
 
-
+                    //execution of the withdrawal, updating the
                     try {
                         Connection conn = ConnectionManager.getConnection();
                         AccountsDAO accountListDAO = new AccountsDAO(conn);
@@ -89,16 +90,29 @@ public class AccountMenu extends CurrencyFormat {
                         Accounts featureAccount = accountListDAO.getAccountById(account_id);
 
                         float oldBalance = featureAccount.getBalance();
-                        float newBalance = oldBalance - withdrawalAmount;
-                        featureAccount.setBalance(newBalance);
 
-                        accountListDAO.updateAccounts(featureAccount);
+                        //verifying that we don't overdraft an account
+                        if(withdrawalAmount>oldBalance){
+                            System.out.println("You cannot withdraw more than the account balance!");
+                        }
 
-                        new AccountMenu().accountMenu(user, account_id);
+                        else {
+
+                            float newBalance = oldBalance - withdrawalAmount;
+                            featureAccount.setBalance(newBalance);
+
+                            accountListDAO.updateAccounts(featureAccount);
+
+                        }
+
+                        new AccountMenu().accountMenu(user,account_id);
+
                     } catch (SQLException | IOException e) {
                         e.printStackTrace();
                     }
-                }else{
+                }
+                //if the user tries to make a negative withdrawal, they get a message
+                else{
                     System.out.println("You cannot make a negative withdrawal");
                 }
                 break;
