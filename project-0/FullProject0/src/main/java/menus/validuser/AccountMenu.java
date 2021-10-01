@@ -1,10 +1,14 @@
 package menus.validuser;
 
 import DAOs.AccountsDAO;
+import DAOs.TransactionsDAO;
 import menus.OuterMenu;
 import models.Accounts;
+import models.Transactions;
 import models.Users;
 import utils.ConnectionManager;
+import utils.MyArrayList;
+import utils.PrintOut;
 import utils.formatValidation.CurrencyFormat;
 
 import java.io.IOException;
@@ -37,8 +41,9 @@ public class AccountMenu extends CurrencyFormat {
         System.out.println("(1) Deposit funds into this account\n" +
                 "(2) Withdraw funds from this account\n" +
                 "(3) Transfer funds from this account to a different account\n" +
-                "(4) Return to Bank Menu\n" +
-                "(5) Logout\n" +
+                "(4) View transaction history\n" +
+                "(5) Return to Bank Menu\n" +
+                "(6) Logout\n" +
                 "Please make a selection to continue:");
         String choice = choiceScanner.nextLine();
 
@@ -60,6 +65,18 @@ public class AccountMenu extends CurrencyFormat {
                         featureAccount.setBalance(newBalance);
 
                         accountListDAO.updateAccounts(featureAccount);
+
+                        TransactionsDAO updateTransTable = new TransactionsDAO(conn);
+
+                        Transactions withdrawal = new Transactions();
+                        withdrawal.setAccount_id(account_id);
+                        withdrawal.setWithdrawal(false);
+                        withdrawal.setDeposit(true);
+                        withdrawal.setTransfer(false);
+                        withdrawal.setTransaction_amount(depositAmount);
+
+                        updateTransTable.updateTransaction(withdrawal);
+
 
                         new AccountMenu().accountMenu(user,account_id);
                     }
@@ -103,6 +120,19 @@ public class AccountMenu extends CurrencyFormat {
 
                             accountListDAO.updateAccounts(featureAccount);
 
+
+
+                            TransactionsDAO updateTransTable = new TransactionsDAO(conn);
+
+                            Transactions withdrawal = new Transactions();
+                            withdrawal.setAccount_id(account_id);
+                            withdrawal.setWithdrawal(true);
+                            withdrawal.setDeposit(false);
+                            withdrawal.setTransfer(false);
+                            withdrawal.setTransaction_amount(withdrawalAmount);
+
+                            updateTransTable.updateTransaction(withdrawal);
+
                         }
 
                         new AccountMenu().accountMenu(user,account_id);
@@ -123,9 +153,38 @@ public class AccountMenu extends CurrencyFormat {
 
                 break;
             case "4":
-                new BankMenu().bankMenu(user);
+
+                //view transaction history
+                try{
+                    Connection conn = ConnectionManager.getConnection();
+                    TransactionsDAO dao = new TransactionsDAO(conn);
+
+                    MyArrayList<Transactions> transactionHistory =
+                            dao.getAllAccountTransactions(account_id);
+
+                    int i =0;
+                    while(i<transactionHistory.size()){
+                        if(transactionHistory.get(i)!=null){
+                            new PrintOut().printOut(transactionHistory.get(i));
+                        }
+                        i++;
+                    }
+
+                    new AccountMenu().accountMenu(user,account_id);
+
+                }
+                catch (SQLException | IOException | ParseException e){
+                    e.printStackTrace();
+                }
+
+
+
+
                 break;
             case "5":
+                new BankMenu().bankMenu(user);
+                break;
+            case "6":
                 new OuterMenu().OuterMenu();
                 break;
         }

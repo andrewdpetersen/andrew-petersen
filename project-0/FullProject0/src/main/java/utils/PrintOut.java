@@ -3,10 +3,13 @@ package utils;
 import models.Accounts;
 import models.Transactions;
 import models.Users;
+import utils.formatValidation.CurrencyFormat;
+
 import java.math.RoundingMode;
 import java.math.BigDecimal;
+import java.text.ParseException;
 
-public class PrintOut {
+public class PrintOut extends CurrencyFormat {
 
     //This prints out a Users object
     public void printOut(Users user){
@@ -29,7 +32,7 @@ public class PrintOut {
     }
 
 
-    public void printOut(Transactions transaction){
+    public void printOut(Transactions transaction) throws ParseException {
         String type;
         if(transaction.isDeposit()){
             type = "Deposit";
@@ -41,6 +44,6 @@ public class PrintOut {
 
         System.out.println("Transaction ID:"+transaction.getTransaction_id()+"// " +
                 "Type of transaction:"+type+"" +"\n" +
-                "Amount: $"+transaction.getTransaction_amount());
+                "Amount: $"+betterConverter(transaction.getTransaction_amount()));
     }
 }
