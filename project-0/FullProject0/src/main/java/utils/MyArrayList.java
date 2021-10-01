@@ -52,7 +52,7 @@ public class MyArrayList<E> implements MyArrayListInterface<E> {
                 newList[i]=arrayList[i];
             }
             newList[index] = ele;
-            for(int i=index;i< newList.length-1;i++){
+            for(int i=index;i< newList.length-2;i++){
                 newList[i+1]=arrayList[i];
             }
         }

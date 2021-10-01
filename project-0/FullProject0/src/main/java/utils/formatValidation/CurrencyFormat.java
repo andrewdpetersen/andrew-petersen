@@ -2,6 +2,9 @@ package utils.formatValidation;
 
 import utils.MyArrayList;
 
+import java.text.DecimalFormat;
+import java.text.ParseException;
+
 public class CurrencyFormat {
     //$1,234.56
 
@@ -21,7 +24,6 @@ public class CurrencyFormat {
         }
 
         int numSize = number.length();
-        int commaLocation = (numSize - 2) % 3;
 
         if(numSize==12){
             numberChars.add(",",1);
@@ -68,5 +70,16 @@ public class CurrencyFormat {
             }
         }
         return money;
+    }
+
+    public String betterConverter(float amount) throws ParseException {
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        decimalFormat.setGroupingUsed(true);
+        decimalFormat.setGroupingSize(3);
+
+        Object money = decimalFormat.parseObject(String.valueOf(amount));
+        String currency = money.toString();
+
+        return currency;
     }
 }
