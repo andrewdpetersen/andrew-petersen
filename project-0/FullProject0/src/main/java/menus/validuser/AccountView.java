@@ -5,13 +5,15 @@ import models.Accounts;
 import models.Users;
 import utils.ConnectionManager;
 import utils.MyArrayList;
+import utils.formatValidation.CurrencyFormat;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.Scanner;
 
-public class AccountView {
+public class AccountView extends CurrencyFormat {
     public void accountView(Users user){
 
         //code here to select and view one account
@@ -32,7 +34,7 @@ public class AccountView {
                     idList.add(tempAccount.getAccount_id());
                     System.out.println("(" + tempAccount.getAccount_id() + ")" +
                             "; Type: " + tempAccount.getAccount_type() + "; " +
-                            "Balance: $" + tempAccount.getBalance());
+                            "Balance: $"+ betterConverter(tempAccount.getBalance()));
                 }
                 i++;
             }
@@ -42,7 +44,7 @@ public class AccountView {
 
             new AccountMenu().accountMenu(user, chooseAccount);
         }
-        catch (SQLException|IOException e){
+        catch (SQLException | IOException | ParseException e){
             e.printStackTrace();
         }
     }

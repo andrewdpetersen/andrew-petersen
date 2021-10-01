@@ -5,13 +5,15 @@ import menus.OuterMenu;
 import models.Accounts;
 import models.Users;
 import utils.ConnectionManager;
+import utils.formatValidation.CurrencyFormat;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.Scanner;
 
-public class AccountMenu {
+public class AccountMenu extends CurrencyFormat {
     public void accountMenu(Users user, int account_id){
 
 
@@ -24,10 +26,10 @@ public class AccountMenu {
 
             System.out.println("Account ID: "+ account_id);
             System.out.println("Account Type: " + featureAccount.getAccount_type());
-            System.out.println("Balance: $"+ featureAccount.getBalance());
+            System.out.println("Balance: $"+ betterConverter(featureAccount.getBalance()));
             System.out.println("User ID: "+featureAccount.getUser_id());
         }
-        catch(SQLException | IOException e){
+        catch(SQLException | IOException | ParseException e){
             e.printStackTrace();
         }
 

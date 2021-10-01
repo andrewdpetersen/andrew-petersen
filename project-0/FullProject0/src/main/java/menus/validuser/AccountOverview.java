@@ -6,13 +6,15 @@ import models.Accounts;
 import models.Users;
 import utils.ConnectionManager;
 import utils.MyArrayList;
+import utils.formatValidation.CurrencyFormat;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.Scanner;
 
-public class AccountOverview {
+public class AccountOverview extends CurrencyFormat {
     public void accountOverview(Users user){
 
         try {
@@ -31,15 +33,15 @@ public class AccountOverview {
                 if(tempAccount!=null) {
                     System.out.println("Account ID: " + tempAccount.getAccount_id() + "\n" +
                             "Account Type: " + tempAccount.getAccount_type() + "\n" +
-                            "Balance: " + String.valueOf(tempAccount.getBalance()));
+                            "Balance: $" + betterConverter(tempAccount.getBalance()));
                     totalBalance += tempAccount.getBalance();
                 }
                 i++;
             }
             System.out.println("The total balance of all your accounts is: $" +
-                    String.valueOf(totalBalance));
+                    betterConverter(totalBalance));
         }
-        catch (SQLException | IOException e){
+        catch (SQLException | IOException | ParseException e){
             e.printStackTrace();
         }
 
