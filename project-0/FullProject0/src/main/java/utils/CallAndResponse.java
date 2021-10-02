@@ -5,16 +5,16 @@ import utils.formatValidation.CurrencyFormat;
 import java.text.ParseException;
 import java.util.Scanner;
 
-public class CallAndResponse implements CurrencyFormat {
+public interface CallAndResponse extends CurrencyFormat {
 
-    public String caller(String call){
+    default String caller(String call){
         Scanner getResponse = new Scanner(System.in);
         System.out.println(call);
         String response = getResponse.nextLine();
         return response;
     }
 
-    public String moneyResponse(String call) throws ParseException {
+    default String moneyResponse(String call) throws ParseException {
         Scanner getAmount = new Scanner(System.in);
         System.out.println(call);
         String money = getAmount.nextLine();

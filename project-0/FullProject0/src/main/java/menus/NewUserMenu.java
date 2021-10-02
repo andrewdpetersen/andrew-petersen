@@ -12,8 +12,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 
-public class NewUserMenu extends CallAndResponse implements EmailFormat, NameFormat {
-    public void newUserMenu(){
+public interface NewUserMenu extends CallAndResponse, EmailFormat, NameFormat {
+    default void newUserMenu(){
 
 
         //This section asks the user for input and sets 5 string references to be used later

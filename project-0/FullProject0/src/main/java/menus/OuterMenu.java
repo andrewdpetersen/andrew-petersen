@@ -2,7 +2,7 @@ package menus;
 
 import java.util.Scanner;
 
-public class OuterMenu implements LoginMenu{
+public class OuterMenu implements LoginMenu, NewUserMenu{
     public void OuterMenu(){
         boolean outer = true;
 
@@ -22,7 +22,7 @@ public class OuterMenu implements LoginMenu{
                     loginPortal();
                     break;
                 case "2":
-                    new NewUserMenu().newUserMenu();
+                    newUserMenu();
                     break;
                 case "3":
                 case "Q":
