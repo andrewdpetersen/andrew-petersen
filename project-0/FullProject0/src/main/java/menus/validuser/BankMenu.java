@@ -6,8 +6,8 @@ import models.Users;
 
 import java.util.Scanner;
 
-public class BankMenu{
-    public void bankMenu(Users user){
+public interface BankMenu {
+    default void bankMenu(Users user){
         boolean validUser =true;
         //MENU OPTIONS
         while(validUser){

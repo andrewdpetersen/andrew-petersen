@@ -11,7 +11,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public interface LoginMenu {
+public interface LoginMenu extends BankMenu {
     default void loginPortal(){
         Scanner checker = new Scanner(System.in);
 
@@ -44,7 +44,7 @@ public interface LoginMenu {
                 String nameCheck = checkingUser.getUsername();
                 String passCheck = checkingUser.getPassword();
                 if(nameCheck.equals(usernameCheck) && passCheck.equals(passwordCheck)){
-                    new BankMenu().bankMenu(checkingUser);
+                    bankMenu(checkingUser);
                 }
                 else{
                     System.out.println("Incorrect password");

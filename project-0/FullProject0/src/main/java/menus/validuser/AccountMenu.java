@@ -17,7 +17,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Scanner;
 
-public class AccountMenu implements CurrencyFormat {
+public class AccountMenu implements CurrencyFormat, BankMenu {
     public void accountMenu(Users user, int account_id) {
 
 
@@ -243,7 +243,7 @@ public class AccountMenu implements CurrencyFormat {
 
                 break;
             case "5":
-                new BankMenu().bankMenu(user);
+                bankMenu(user);
                 break;
             case "6":
                 new OuterMenu().OuterMenu();

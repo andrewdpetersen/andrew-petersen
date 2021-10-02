@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Scanner;
 
-public class AccountOverview implements CurrencyFormat {
+public class AccountOverview extends CurrencyFormat, BankMenu {
     public void accountOverview(Users user){
 
         try {
@@ -57,7 +57,7 @@ public class AccountOverview implements CurrencyFormat {
                 new AccountView().accountView(user);
                 break;
             case "2":
-                new BankMenu().bankMenu(user);
+                bankMenu(user);
                 break;
             case "3":
                 new OuterMenu().OuterMenu();

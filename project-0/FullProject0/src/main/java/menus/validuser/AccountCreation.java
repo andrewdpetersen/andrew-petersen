@@ -10,7 +10,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class AccountCreation {
+public class AccountCreation implements BankMenu{
     public void accountCreation(Users user){
 
         //code here to create an account
@@ -46,6 +46,6 @@ public class AccountCreation {
             e.printStackTrace();
         }
 
-        new BankMenu().bankMenu(user);
+        bankMenu(user);
     }
 }
