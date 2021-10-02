@@ -6,7 +6,7 @@ import models.Users;
 
 import java.util.Scanner;
 
-public interface BankMenu {
+public interface BankMenu extends AccountView, AccountCreation{
     default void bankMenu(Users user){
         boolean validUser =true;
         //MENU OPTIONS
@@ -26,11 +26,11 @@ public interface BankMenu {
                     break;
                 //create new bank account
                 case "2":
-                    new AccountCreation().accountCreation(user);
+                    accountCreation(user);
                     break;
                 //view one specific account
                 case "3":
-                    new AccountView().accountView(user);
+                    accountView(user);
                     break;
                 //logout
                 case "L":

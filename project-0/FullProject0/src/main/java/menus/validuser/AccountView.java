@@ -13,8 +13,8 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Scanner;
 
-public class AccountView implements CurrencyFormat {
-    public void accountView(Users user){
+public interface AccountView extends CurrencyFormat {
+    default void accountView(Users user){
 
         //code here to select and view one account
 
