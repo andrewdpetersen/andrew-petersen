@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Scanner;
 
-public class AccountOverview extends CurrencyFormat {
+public class AccountOverview implements CurrencyFormat {
     public void accountOverview(Users user){
 
         try {

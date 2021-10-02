@@ -9,7 +9,7 @@ import java.math.RoundingMode;
 import java.math.BigDecimal;
 import java.text.ParseException;
 
-public class PrintOut extends CurrencyFormat {
+public class PrintOut implements CurrencyFormat {
 
     //This prints out a Users object
     public void printOut(Users user){

@@ -2,8 +2,8 @@ package menus;
 
 import java.util.Scanner;
 
-public class OuterMenu {
-    public void OuterMenu() {
+public class OuterMenu implements LoginMenu{
+    public void OuterMenu(){
         boolean outer = true;
 
         while (outer) {
@@ -19,7 +19,7 @@ public class OuterMenu {
 
             switch (outerInput) {
                 case "1":
-                    new LoginMenu().loginMenu();
+                    loginPortal();
                     break;
                 case "2":
                     new NewUserMenu().newUserMenu();

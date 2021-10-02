@@ -5,10 +5,10 @@ import utils.MyArrayList;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 
-public class CurrencyFormat {
+public interface CurrencyFormat {
     //$1,234.56
 
-    public String betterConverter(float amount) throws ParseException {
+    default String betterConverter(float amount) throws ParseException {
         DecimalFormat decimalFormat = new DecimalFormat("#,###.##");
         decimalFormat.setGroupingUsed(true);
         decimalFormat.setGroupingSize(3);

@@ -17,7 +17,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Scanner;
 
-public class AccountMenu extends CurrencyFormat {
+public class AccountMenu implements CurrencyFormat {
     public void accountMenu(Users user, int account_id) {
 
 

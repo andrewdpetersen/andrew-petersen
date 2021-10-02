@@ -11,8 +11,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class LoginMenu {
-    public void loginMenu(){
+public interface LoginMenu {
+    default void loginPortal(){
         Scanner checker = new Scanner(System.in);
 
         System.out.print("Please enter your username:");

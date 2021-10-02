@@ -5,7 +5,7 @@ import utils.formatValidation.CurrencyFormat;
 import java.text.ParseException;
 import java.util.Scanner;
 
-public class CallAndResponse extends CurrencyFormat {
+public class CallAndResponse implements CurrencyFormat {
 
     public String caller(String call){
         Scanner getResponse = new Scanner(System.in);
