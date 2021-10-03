@@ -7,10 +7,16 @@ import java.util.Scanner;
  * input and calls a different method or closes the app based on the input.
  */
 public class OuterMenu implements LoginMenu, NewUserMenu{
-    public void OuterMenu(boolean outer){
-        boolean running = outer;
 
-        while (running) {
+    /**
+     * The OuterMenu method takes a boolean parameter, "outer", and runs a while loop
+     * while "outer" is true. It asks for input from the console, and runs a switch based
+     * on the input.
+     */
+    public void OuterMenu(boolean outer){
+
+        //a control flow while loop that runs as long as the boolean "outer" is true.
+        while (outer) {
             Scanner menuScan = new Scanner(System.in);
 
             System.out.print("########## OUTER PORTAL ##########\n" +
@@ -21,16 +27,20 @@ public class OuterMenu implements LoginMenu, NewUserMenu{
                     "Please make a selection and press 'Enter':");
             String outerInput = menuScan.nextLine();
 
+            //a control flow switch based on the choice read by the scanner
             switch (outerInput) {
                 case "1":
+                    //runs the loginPortal method.
                     loginPortal();
                     break;
                 case "2":
+                    //runs the newUserMenu method.
                     newUserMenu();
                     break;
                 case "3":
                 case "Q":
                 case "q":
+                    //exits the app
                     outer = false;
                     break;
                 default:
