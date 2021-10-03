@@ -60,7 +60,7 @@ public class AccountOverview implements CurrencyFormat, BankMenu, AccountView{
                 bankMenu(user);
                 break;
             case "3":
-                new OuterMenu().OuterMenu();
+                new OuterMenu().OuterMenu(false);
                 break;
         }
     }

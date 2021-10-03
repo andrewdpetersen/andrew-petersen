@@ -246,7 +246,7 @@ public class AccountMenu implements CurrencyFormat, BankMenu {
                 bankMenu(user);
                 break;
             case "6":
-                new OuterMenu().OuterMenu();
+                new OuterMenu().OuterMenu(false);
                 break;
         }
     }

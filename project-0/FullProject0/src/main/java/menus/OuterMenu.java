@@ -2,11 +2,15 @@ package menus;
 
 import java.util.Scanner;
 
+/**
+ * The OuterMenu class is a class with a single method. The method calls for user
+ * input and calls a different method or closes the app based on the input.
+ */
 public class OuterMenu implements LoginMenu, NewUserMenu{
-    public void OuterMenu(){
-        boolean outer = true;
+    public void OuterMenu(boolean outer){
+        boolean running = outer;
 
-        while (outer) {
+        while (running) {
             Scanner menuScan = new Scanner(System.in);
 
             System.out.print("########## OUTER PORTAL ##########\n" +

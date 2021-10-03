@@ -37,7 +37,7 @@ public interface BankMenu extends AccountView, AccountCreation{
                 case "l":
                 case "4":
                     validUser = false;
-                    new OuterMenu().OuterMenu();
+                    new OuterMenu().OuterMenu(false);
                     break;
             }
         }
