@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-
 import models.Accounts;
 import utils.MyArrayList;
 
@@ -58,6 +56,10 @@ public class AccountsDAO {
         return getAccount;
     }
 
+    /**
+     * The getAllAccounts method is not used and so is commented out.
+     */
+/*
     public MyArrayList<Accounts> getAllAccounts() throws SQLException {
         //returns a list of all the accounts table
         String sqlGetAll = "SELECT * FROM accounts";
@@ -75,7 +77,7 @@ public class AccountsDAO {
         }
         return fullAccountsList;
     }
-
+*/
     public MyArrayList<Accounts> getAccountsByUser(int user_id) throws SQLException {
         //returns all the accounts from a given user
         String sqlGet = "SELECT * FROM accounts WHERE user_id = ?";
@@ -95,6 +97,10 @@ public class AccountsDAO {
         }
         return userAccountsList;
     }
+
+    /**
+     * The deleteAccount method is not used and is commented out.
+     */
 
     public void deleteAccount(int account_id) throws SQLException {
         //deletes the account with the given account_id

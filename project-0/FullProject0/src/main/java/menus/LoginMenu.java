@@ -5,7 +5,6 @@ import menus.validuser.BankMenu;
 import models.Users;
 import utils.ConnectionManager;
 import utils.MyArrayList;
-
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
