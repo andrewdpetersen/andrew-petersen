@@ -4,23 +4,36 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-
 import models.Transactions;
 import utils.MyArrayList;
 
+/**
+ * The TransactionsDAO class is used to access Transactions object data in the database.
+ * The TransactionsDAO class uses a Connection object, "conn". It contains a constructor method,
+ * an updateTransaction method, and a getAllAccountTransactions method.
+ */
 public class TransactionsDAO {
     private Connection conn;
 
     public TransactionsDAO(Connection conn){this.conn = conn;}
 
+    /**
+     * The updateTransaction method takes a Transactions object as a parameter. It
+     * prepares a PreparedStatement instance and uses the Connection to query the database.
+     *
+     * The results of this query determine the next step, either inserting a new row of
+     * data into the database, or updating a current row in the database.
+     */
     public void updateTransaction(Transactions tran) throws SQLException {
-        //create and update a row in transactions table
+
+        //The next 4 lines create and execute a PreparedStatement, and
+        //then assign the result of the query to a ResultSet.
         String checkTransaction = "SELECT * FROM transactions WHERE transaction_id = ?";
         PreparedStatement prepCheckTrans = conn.prepareStatement(checkTransaction);
         prepCheckTrans.setInt(1,tran.getTransaction_id());
         ResultSet tranExists = prepCheckTrans.executeQuery();
 
+        //If the result set is empty, the next if/then block inserts a new row into the database.
         if(!tranExists.next()){
             String newTransaction = "INSERT INTO transactions \n\n" +
                     "(deposit,withdrawal,transfer,transfer_to_account_id,transaction_amount,account_id)\n\n" +
@@ -34,6 +47,9 @@ public class TransactionsDAO {
             addTransaction.setInt(6,tran.getAccount_id());
             addTransaction.executeUpdate();
         }
+
+        //If the ResultSet is not empty, the else block updates the corresponding
+        //row in the database.
         else{
             String updateDeposit = "UPDATE transactions SET deposit = ?;";
             String updateWithdrawal = "UPDATE transactions SET withdrawal = ?;";
@@ -52,7 +68,7 @@ public class TransactionsDAO {
             prepUpdateAll.executeUpdate();
         }
     }
-
+/*
     public Transactions getTransactionById(int transaction_id) throws SQLException {
         //returns a transaction with the given transaction_id
         String sqlTransaction = "SELECT * FROM transactions WHERE transaction_id = ?";
@@ -70,7 +86,9 @@ public class TransactionsDAO {
         newTransaction.setAccount_id(getTransaction.getInt(7));
         return newTransaction;
     }
+*/
 
+/*
     public MyArrayList<Transactions> getAllTransactions() throws SQLException {
         //returns all transactions
         String sqlAllTrans = "SELECT * FROM transactions";
@@ -92,15 +110,30 @@ public class TransactionsDAO {
 
         return transactionList;
     }
+*/
 
+    /**
+     * The getAllAccountTransactions takes an int as a parameter (the account_id),
+     * and returns a MyArrayList of all the Transactions that have the given account_id
+     * in the account_id field.
+     */
     public MyArrayList<Transactions> getAllAccountTransactions(int account_id) throws SQLException {
-        //returns all transactions for a given account
+
+        //The next 4 lines create and execute a PreparedStatement, and
+        //then assign the result of the query to a ResultSet.
         String sqlAccountTrans = "SELECT * FROM transactions WHERE account_id = ?";
         PreparedStatement prepAccountTrans = conn.prepareStatement(sqlAccountTrans);
         prepAccountTrans.setInt(1,account_id);
         ResultSet allAccountTrans = prepAccountTrans.executeQuery();
 
+        //instantiates a MyArrayList object and assigns it to "accountTransactions".
         MyArrayList<Transactions> accountTransactions = new MyArrayList<>();
+
+        /*
+        The while control flow statement runs while there is another row in the
+        ResultSet. It instantiates a Transactions object, sets the fields in the object
+        with data from the database, and then adds it to "accountTransactions".
+         */
         while(allAccountTrans.next()){
             Transactions nextTransaction = new Transactions();
             nextTransaction.setTransaction_id(allAccountTrans.getInt(1));

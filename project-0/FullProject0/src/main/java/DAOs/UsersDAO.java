@@ -8,6 +8,11 @@ import java.sql.SQLException;
 import models.Users;
 import utils.MyArrayList;
 
+/**
+ * The UsersDAO class is used to access Users object data in the database.
+ * The UsersDAO class uses a Connection object, "conn". It contains a constructor method,
+ * an updateUser method, and a getUserList method.
+ */
 public class UsersDAO {
 
     //the UsersDAO class has a private field with a connection object.
