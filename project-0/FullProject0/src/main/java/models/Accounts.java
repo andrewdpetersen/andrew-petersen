@@ -1,6 +1,10 @@
 package models;
 
-//models.Accounts class has
+/**
+ * The Accounts class is a POJO, with 4 fields and Getters and Setters
+ *
+ * models.Users class has 4 fields: account_id, account_type, balance, user_id
+ */
 public class Accounts {
     private int account_id;
     private String account_type;

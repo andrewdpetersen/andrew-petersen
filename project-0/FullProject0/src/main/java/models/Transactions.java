@@ -1,7 +1,11 @@
 package models;
 
-//models.Transactions class has 6 fields: transaction_id, deposit, withdrawal, transfer,
-//transfer_to_account_id, account_id.
+/**
+ * The Accounts class is a POJO, with 7 fields and Getters and Setters
+ *
+ * models.Users class has 7 fields: transaction_id, deposit, withdrawal, transfer,
+ * transfer_to_account_id, transaction_amount, account_id
+ */
 public class Transactions {
     private int transaction_id;
     private boolean deposit;

@@ -1,6 +1,10 @@
 package models;
 
-//models.Users class has 6 fields: user_id, username, password,email, first_name, last_name
+/**
+ * The Users class is a POJO, with 6 fields and Getters and Setters
+ *
+ * models.Users class has 6 fields: user_id, username, password,email, first_name, last_name
+ */
 
 public class Users {
     private int user_id;
