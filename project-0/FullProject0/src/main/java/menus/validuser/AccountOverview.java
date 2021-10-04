@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.Scanner;
+
 
 /**
  * The AccountOverview class contains one method, "accountOverview", that takes a Users
@@ -41,12 +41,15 @@ public class AccountOverview implements CurrencyFormat, BankMenu, AccountView{
             //adds each balance to the "totalBalance" float.
             int i = 0;
             float totalBalance = 0.0f;
+            System.out.println("///////////////////////////");
             while (i < accountList.size()) {
                 Accounts tempAccount = accountList.get(i);
                 if(tempAccount!=null) {
-                    System.out.println("Account ID: " + tempAccount.getAccount_id() + "\n" +
-                            "Account Type: " + tempAccount.getAccount_type() + "\n" +
-                            "Balance: $" + betterConverter(tempAccount.getBalance()));
+                    printOut(tempAccount);
+                    System.out.println("///////////////////////////");
+                    //System.out.println("Account ID: " + tempAccount.getAccount_id() + "\n" +
+                            //"Account Type: " + tempAccount.getAccount_type() + "\n" +
+                            //"Balance: $" + betterConverter(tempAccount.getBalance()));
                     totalBalance += tempAccount.getBalance();
                 }
                 i++;
@@ -61,7 +64,7 @@ public class AccountOverview implements CurrencyFormat, BankMenu, AccountView{
         }
 
         //This section asks for console input
-        String overviewMenu = caller("What would you like to do? +\n" +
+        String overviewMenu = caller("What would you like to do?\n" +
                     "(1) View details for one of my accounts\n" +
                     "(2) Go back to the Bank Menu\n" +
                     "(3) Logout");

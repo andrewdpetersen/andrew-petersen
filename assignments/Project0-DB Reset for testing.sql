@@ -36,4 +36,3 @@
 SELECT * FROM users u;
 SELECT * FROM accounts a;
 SELECT * FROM transactions;
-

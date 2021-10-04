@@ -6,6 +6,7 @@ import models.Users;
 import utils.CallAndResponse;
 import utils.ConnectionManager;
 import utils.MyArrayList;
+import utils.PrintOut;
 import utils.formatValidation.CurrencyFormat;
 import java.io.IOException;
 import java.sql.Connection;
@@ -18,7 +19,7 @@ import java.util.Scanner;
  * of Accounts instances, asks for a console input to select one of the instances and then
  * continues by using the input as an argument in the accountMenu method.
  */
-public interface AccountView extends CurrencyFormat, CallAndResponse {
+public interface AccountView extends CurrencyFormat, CallAndResponse, PrintOut {
     /**
      * The accountView method prints a series of Accounts instances, asks for a
      * console input to select one of the instances and then continues by using
@@ -42,13 +43,13 @@ public interface AccountView extends CurrencyFormat, CallAndResponse {
 
             //This section prints each Accounts instance with its data
             int i = 0;
+            System.out.println("///////////////////////////");
             while (i < accountList.size()) {
                 Accounts tempAccount = accountList.get(i);
                 if (tempAccount != null) {
                     idList.add(tempAccount.getAccount_id());
-                    System.out.println("(" + tempAccount.getAccount_id() + ")" +
-                            "; Type: " + tempAccount.getAccount_type() + "; " +
-                            "Balance: $"+ betterConverter(tempAccount.getBalance()));
+                    printOut(tempAccount);
+                    System.out.println("///////////////////////////");
                 }
                 i++;
             }

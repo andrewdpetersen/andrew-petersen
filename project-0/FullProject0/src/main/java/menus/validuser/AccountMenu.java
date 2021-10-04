@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.Scanner;
 
 /**
  * The AccountMenu class contains one method, "accountMenu", that takes two
@@ -40,10 +39,11 @@ public class AccountMenu implements CurrencyFormat, BankMenu, PrintOut {
 
             Accounts featureAccount = accountListDAO.getAccountById(account_id);
 
-            System.out.println("Account ID: "+ account_id);
-            System.out.println("Account Type: " + featureAccount.getAccount_type());
-            System.out.println("Balance: $"+ betterConverter(featureAccount.getBalance()));
-            System.out.println("User ID: "+featureAccount.getUser_id());
+            printOut(featureAccount);
+            //System.out.println("Account ID: "+ account_id);
+            //System.out.println("Account Type: " + featureAccount.getAccount_type());
+            //System.out.println("Balance: $"+ betterConverter(featureAccount.getBalance()));
+            //System.out.println("User ID: "+featureAccount.getUser_id());
         }
         catch(SQLException | IOException | ParseException e){
             e.printStackTrace();
