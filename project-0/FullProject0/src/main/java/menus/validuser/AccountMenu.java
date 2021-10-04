@@ -10,18 +10,30 @@ import utils.ConnectionManager;
 import utils.MyArrayList;
 import utils.PrintOut;
 import utils.formatValidation.CurrencyFormat;
-
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Scanner;
 
+/**
+ * The AccountMenu class contains one method, "accountMenu", that takes two
+ * parameters, a Users object, "user", and an int, "account_id". It prints
+ * information as an Accounts object from the database to the console. Then it
+ * requests input from the console. Using that input, it performs various functions
+ * regarding transactions on the given account.
+ */
 public class AccountMenu implements CurrencyFormat, BankMenu {
+
+    /**
+     * The accountMenu method takes two parameters, a Users object, "user", and an int,
+     * "account_id". It prints information as an Accounts object from the database to
+     * the console. Then it requests input from the console. Using that input, it performs
+     * various functions regarding transactions on the given account.
+     */
     public void accountMenu(Users user, int account_id) {
 
-
-
+        //This block prints information to the console using the account_id.
         try {
             Connection conn = ConnectionManager.getConnection();
             AccountsDAO accountListDAO = new AccountsDAO(conn);
@@ -37,6 +49,7 @@ public class AccountMenu implements CurrencyFormat, BankMenu {
             e.printStackTrace();
         }
 
+        //This section asks for input from the console, and assigns it to "choice".
         Scanner choiceScanner = new Scanner(System.in);
         System.out.println("(1) Deposit funds into this account\n" +
                 "(2) Withdraw funds from this account\n" +
@@ -47,27 +60,33 @@ public class AccountMenu implements CurrencyFormat, BankMenu {
                 "Please make a selection to continue:");
         String choice = choiceScanner.nextLine();
 
+        //The control flow statement takes the console input assigned to "choice".
         switch(choice){
             case "1":
-                //run deposit script
+
+                //This block asks for console input and assigns it to depositAmount.
                 Scanner depositScanner = new Scanner(System.in);
                 System.out.println("How much would you like to deposit?");
                 float depositAmount = Float.parseFloat(depositScanner.nextLine());
+
+                //validation to make sure there are no negative deposits
                 if(depositAmount>=0){
                     try{
                         Connection conn = ConnectionManager.getConnection();
                         AccountsDAO accountListDAO = new AccountsDAO(conn);
-
                         Accounts featureAccount = accountListDAO.getAccountById(account_id);
 
+                        // Sets the balance in the Accounts object using the old balance
+                        // and the deposit amount.
                         float oldBalance = featureAccount.getBalance();
                         float newBalance = oldBalance+depositAmount;
                         featureAccount.setBalance(newBalance);
-
                         accountListDAO.updateAccounts(featureAccount);
+
 
                         TransactionsDAO updateTransTable = new TransactionsDAO(conn);
 
+                        //Sets up an instance of the Transactions class
                         Transactions withdrawal = new Transactions();
                         withdrawal.setAccount_id(account_id);
                         withdrawal.setWithdrawal(false);
@@ -75,23 +94,26 @@ public class AccountMenu implements CurrencyFormat, BankMenu {
                         withdrawal.setTransfer(false);
                         withdrawal.setTransaction_amount(depositAmount);
 
+                        //Updates the transactions table
                         updateTransTable.updateTransaction(withdrawal);
 
-
+                        //runs the "accountMenu" method
                         new AccountMenu().accountMenu(user,account_id);
                     }
                     catch (SQLException|IOException e){
                         e.printStackTrace();
                     }
                 }
+
+                //prints a message if there is a negative deposit
                 else{
-                    System.out.println("You cannot make a negative deposit");
+                    System.out.println("Your deposit must be a positive number");
                 }
                 break;
 
             case "2":
 
-                //run withdrawal script
+                //This block asks for console input and assigns it to withdrawalAmount.
                 Scanner withdrawalScanner = new Scanner(System.in);
                 System.out.println("How much would you like to withdraw?");
                 float withdrawalAmount = Float.parseFloat(withdrawalScanner.nextLine());
@@ -99,13 +121,12 @@ public class AccountMenu implements CurrencyFormat, BankMenu {
                 //verifying the withdrawal is not negative
                 if(withdrawalAmount>=0) {
 
-                    //execution of the withdrawal, updating the
                     try {
                         Connection conn = ConnectionManager.getConnection();
                         AccountsDAO accountListDAO = new AccountsDAO(conn);
-
                         Accounts featureAccount = accountListDAO.getAccountById(account_id);
 
+                        //Getting the current balance before a withdrawal occurs
                         float oldBalance = featureAccount.getBalance();
 
                         //verifying that we don't overdraft an account
@@ -115,15 +136,15 @@ public class AccountMenu implements CurrencyFormat, BankMenu {
 
                         else {
 
+                            // Sets the balance in the Accounts object using the old balance
+                            // and the withdrawal amount.
                             float newBalance = oldBalance - withdrawalAmount;
                             featureAccount.setBalance(newBalance);
-
                             accountListDAO.updateAccounts(featureAccount);
-
-
 
                             TransactionsDAO updateTransTable = new TransactionsDAO(conn);
 
+                            //Sets up an instance of the Transactions class
                             Transactions withdrawal = new Transactions();
                             withdrawal.setAccount_id(account_id);
                             withdrawal.setWithdrawal(true);
@@ -131,10 +152,12 @@ public class AccountMenu implements CurrencyFormat, BankMenu {
                             withdrawal.setTransfer(false);
                             withdrawal.setTransaction_amount(withdrawalAmount);
 
+                            //Updates the transactions table
                             updateTransTable.updateTransaction(withdrawal);
 
                         }
 
+                        //runs the "accountMenu" method
                         new AccountMenu().accountMenu(user,account_id);
 
                     } catch (SQLException | IOException e) {
@@ -149,40 +172,46 @@ public class AccountMenu implements CurrencyFormat, BankMenu {
 
             case "3":
 
-                //run transfer script
+                //Asks for console input and assigns it to transferAmount
                 Scanner transferScanner = new Scanner(System.in);
                 System.out.println("How much would you like to transfer?");
                 float transferAmount = Float.parseFloat(transferScanner.nextLine());
+
                 try {
+                    //verifies that the transfer amount is not negative
                     if (transferAmount >= 0) {
-                        //find the account you wish to transfer to and set up the transfer
+
                         Connection conn = ConnectionManager.getConnection();
                         AccountsDAO transferFinder = new AccountsDAO(conn);
 
+                        //Queries the database and assigns the Accounts instance to fromAccount
                         Accounts fromAccount = transferFinder.getAccountById(account_id);
 
+                        //Asks for console input for the account the transfer is going into.
                         System.out.println("What is the account ID of the account you " +
                                 "want to transfer the funds into:");
                         int toAccountId = Integer.parseInt(transferScanner.nextLine());
 
+                        //Queries the database and assigns the Accounts instance to toAccount
                         Accounts toAccount = transferFinder.getAccountById(toAccountId);
 
-                        //do the transfer
-
+                        //Executes the transfer and updates the database with the new balances
                         if (transferAmount <= fromAccount.getBalance()) {
                             float oldFromBalance = fromAccount.getBalance();
                             float newFromBalance = oldFromBalance - transferAmount;
                             float oldToBalance = toAccount.getBalance();
                             float newToBalance = oldToBalance + transferAmount;
 
+                            //updates the accounts table in the database
                             toAccount.setBalance(newToBalance);
                             transferFinder.updateAccounts(toAccount);
-
                             fromAccount.setBalance(newFromBalance);
                             transferFinder.updateAccounts(fromAccount);
 
                             TransactionsDAO updateTransTable = new TransactionsDAO(conn);
 
+                            //This section creates two instances of Transactions objects
+                            //and updates the transactions table in the database.
                             Transactions transferFrom = new Transactions();
                             transferFrom.setAccount_id(account_id);
                             transferFrom.setWithdrawal(false);
@@ -201,11 +230,12 @@ public class AccountMenu implements CurrencyFormat, BankMenu {
                             transferTo.setTransaction_amount(transferAmount);
                             updateTransTable.updateTransaction(transferTo);
 
-
+                            //This else statement runs if the input is greater than the balance
                         } else {
                             System.out.println("You cannot transfer more funds than you have");
                         }
 
+                        //This else statement runs if the input is negative.
                     } else {
                         System.out.println("You cannot make a negative transfer");
                     }
@@ -213,16 +243,22 @@ public class AccountMenu implements CurrencyFormat, BankMenu {
                     e.printStackTrace();
                 }
                 break;
+
             case "4":
 
-                //view transaction history
+                //This block will print the transaction history of the given
+                //account to the console.
                 try{
                     Connection conn = ConnectionManager.getConnection();
                     TransactionsDAO dao = new TransactionsDAO(conn);
 
+                    //Instantiates a MyArrayList that contains Transactions objects.
+                    //Assigns the rows of the ResultSet from the dao to "transactionHistory".
                     MyArrayList<Transactions> transactionHistory =
                             dao.getAllAccountTransactions(account_id);
 
+                    //This block prints out each Transactions instance from
+                    //the "transactionHistory" collection.
                     int i =0;
                     while(i<transactionHistory.size()){
                         if(transactionHistory.get(i)!=null){
@@ -231,21 +267,22 @@ public class AccountMenu implements CurrencyFormat, BankMenu {
                         i++;
                     }
 
+                    //runs the "accountMenu" method
                     new AccountMenu().accountMenu(user,account_id);
 
                 }
                 catch (SQLException | IOException | ParseException e){
                     e.printStackTrace();
                 }
-
-
-
-
                 break;
             case "5":
+
+                //runs the bankMenu method
                 bankMenu(user);
                 break;
             case "6":
+
+                //runs the OuterMenu method
                 new OuterMenu().OuterMenu(false);
                 break;
         }

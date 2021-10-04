@@ -1,15 +1,22 @@
 package menus.validuser;
 
 import menus.OuterMenu;
-
 import models.Users;
-
 import java.util.Scanner;
 
+/**
+ * The interface BankMenu contains one method, "bankMenu", displays a list of options
+ * and asks for console input. Based on the input, it runs a variety of different methods.
+ */
 public interface BankMenu extends AccountView, AccountCreation{
+    /**
+     * The bankMenu method displays a list of options and asks for console input. Based
+     * on the input, it runs a variety of different methods.
+     */
     default void bankMenu(Users user){
+
+        //Asks for console input and assigns it to "bankSelection"
         boolean validUser =true;
-        //MENU OPTIONS
         while(validUser){
             Scanner bankScanner = new Scanner(System.in);
             System.out.println("Welcome, " + user.getUsername() +"!\n" +
@@ -19,20 +26,23 @@ public interface BankMenu extends AccountView, AccountCreation{
                     "(4) Logout");
             String bankSelection = bankScanner.nextLine();
 
+            //The control flow switch takes "bankSelection" as an argument
             switch(bankSelection) {
-                //display accounts list and total balance
                 case "1":
+                    //calls the accountOverview method
                     new AccountOverview().accountOverview(user);
                     break;
-                //create new bank account
+
                 case "2":
+                    //calls the accountCreation methos
                     accountCreation(user);
                     break;
-                //view one specific account
+
                 case "3":
+                    //calls the accountView method
                     accountView(user);
                     break;
-                //logout
+
                 case "L":
                 case "l":
                 case "4":
