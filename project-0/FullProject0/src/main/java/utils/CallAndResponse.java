@@ -27,7 +27,7 @@ public interface CallAndResponse extends CurrencyFormat {
     }
 
     /**
-     * The caller method takes a String parameter, "call", prints "call" to the console,
+     * The moneyResponse method takes a String parameter, "call", prints "call" to the console,
      * and returns the console input as a formatted float, "amount".
      */
     default String moneyResponse(String call) throws ParseException {
