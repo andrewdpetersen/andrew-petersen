@@ -3,6 +3,7 @@ package menus;
 import DAOs.UsersDAO;
 import menus.validuser.BankMenu;
 import models.Users;
+import utils.CallAndResponse;
 import utils.ConnectionManager;
 import utils.MyArrayList;
 import java.io.IOException;
@@ -15,7 +16,7 @@ import java.util.Scanner;
  * for checking console input against user data in the database, and either
  * exiting to the loop in the OuterMenu or continuing to the BankMenu.
  */
-public interface LoginMenu extends BankMenu {
+public interface LoginMenu extends BankMenu, CallAndResponse {
     /**
      * The loginPortal method asks for input from the console, and then uses
      * that input to compare to data in the database. If the data matches the input,
@@ -25,12 +26,10 @@ public interface LoginMenu extends BankMenu {
     default void loginPortal(){
         Scanner checker = new Scanner(System.in);
 
-        //The next 4 lines ask for input from the console and assign the input to 2 references,
+        //The next 2 lines ask for input from the console and assign the input to 2 references,
         // "userNameCheck" and "passwordCheck".
-        System.out.print("Please enter your username:");
-        String usernameCheck = checker.nextLine();
-        System.out.print("Please enter your password:");
-        String passwordCheck = checker.nextLine();
+        String usernameCheck = caller("Please enter your username:");
+        String passwordCheck = caller("Please enter your password:");
 
         try{
             Connection conn = ConnectionManager.getConnection();

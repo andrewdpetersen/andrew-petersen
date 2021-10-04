@@ -61,12 +61,10 @@ public class AccountOverview implements CurrencyFormat, BankMenu, AccountView{
         }
 
         //This section asks for console input
-        Scanner overviewScanner = new Scanner(System.in);
-        System.out.println("What would you like to do?\n" +
-                "(1) View details for one of my accounts\n" +
-                "(2) Go back to the Bank Menu\n" +
-                "(3) Logout");
-        String overviewMenu = overviewScanner.nextLine();
+        String overviewMenu = caller("What would you like to do? +\n" +
+                    "(1) View details for one of my accounts\n" +
+                    "(2) Go back to the Bank Menu\n" +
+                    "(3) Logout");
 
         //This control flow switch uses the console input from the previous section
         switch(overviewMenu){

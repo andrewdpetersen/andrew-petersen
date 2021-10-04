@@ -50,24 +50,20 @@ public class AccountMenu implements CurrencyFormat, BankMenu, PrintOut {
         }
 
         //This section asks for input from the console, and assigns it to "choice".
-        Scanner choiceScanner = new Scanner(System.in);
-        System.out.println("(1) Deposit funds into this account\n" +
+        String choice = caller("(1) Deposit funds into this account\n" +
                 "(2) Withdraw funds from this account\n" +
                 "(3) Transfer funds from this account to a different account\n" +
                 "(4) View transaction history\n" +
                 "(5) Return to Bank Menu\n" +
                 "(6) Logout\n" +
                 "Please make a selection to continue:");
-        String choice = choiceScanner.nextLine();
 
         //The control flow statement takes the console input assigned to "choice".
         switch(choice){
             case "1":
 
                 //This block asks for console input and assigns it to depositAmount.
-                Scanner depositScanner = new Scanner(System.in);
-                System.out.println("How much would you like to deposit?");
-                float depositAmount = Float.parseFloat(depositScanner.nextLine());
+                float depositAmount = Float.parseFloat(caller("How much would you like to deposit?"));
 
                 //validation to make sure there are no negative deposits
                 if(depositAmount>=0){
@@ -114,9 +110,7 @@ public class AccountMenu implements CurrencyFormat, BankMenu, PrintOut {
             case "2":
 
                 //This block asks for console input and assigns it to withdrawalAmount.
-                Scanner withdrawalScanner = new Scanner(System.in);
-                System.out.println("How much would you like to withdraw?");
-                float withdrawalAmount = Float.parseFloat(withdrawalScanner.nextLine());
+                float withdrawalAmount = Float.parseFloat(caller("How much would you like to withdraw?"));
 
                 //verifying the withdrawal is not negative
                 if(withdrawalAmount>=0) {
@@ -173,9 +167,7 @@ public class AccountMenu implements CurrencyFormat, BankMenu, PrintOut {
             case "3":
 
                 //Asks for console input and assigns it to transferAmount
-                Scanner transferScanner = new Scanner(System.in);
-                System.out.println("How much would you like to transfer?");
-                float transferAmount = Float.parseFloat(transferScanner.nextLine());
+                float transferAmount = Float.parseFloat(caller("How much would you like to transfer?"));
 
                 try {
                     //verifies that the transfer amount is not negative
@@ -188,9 +180,8 @@ public class AccountMenu implements CurrencyFormat, BankMenu, PrintOut {
                         Accounts fromAccount = transferFinder.getAccountById(account_id);
 
                         //Asks for console input for the account the transfer is going into.
-                        System.out.println("What is the account ID of the account you " +
-                                "want to transfer the funds into:");
-                        int toAccountId = Integer.parseInt(transferScanner.nextLine());
+                        int toAccountId = Integer.parseInt(caller("What is the account ID of the account you " +
+                                "want to transfer the funds into:"));
 
                         //Queries the database and assigns the Accounts instance to toAccount
                         Accounts toAccount = transferFinder.getAccountById(toAccountId);

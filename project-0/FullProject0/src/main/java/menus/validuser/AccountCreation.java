@@ -3,6 +3,7 @@ package menus.validuser;
 import DAOs.AccountsDAO;
 import models.Accounts;
 import models.Users;
+import utils.CallAndResponse;
 import utils.ConnectionManager;
 import java.io.IOException;
 import java.sql.Connection;
@@ -14,7 +15,7 @@ import java.util.Scanner;
  * takes a Users object as a parameter. It is used to take input from the console
  * and use that input to create a new Accounts object in the database.
  */
-public interface AccountCreation extends AccountView{
+public interface AccountCreation extends AccountView, CallAndResponse {
 
     /**
      * The accountCreation method takes a Users object, "user", as an argument.
@@ -30,18 +31,15 @@ public interface AccountCreation extends AccountView{
         System.out.println("Welcome to the account creation process!");
 
         //this section asks for console input and assigns it to the reference "accountType".
-        Scanner accountCreate = new Scanner(System.in);
-        System.out.println("What type of account would you like to create?\n" +
+        String accountType = caller("What type of account would you like to create?\n" +
                 "(1) Savings\n" +
                 "(2) Checking\n" +
                 "(3) Business");
-        String accountType = accountCreate.nextLine();
 
         //this section asks for console input and assigns it to the reference "startingBalance".
-        System.out.println("How much money would you like to deposit into your account to begin?" +
+        float startingBalance = Float.parseFloat(caller("How much money would you like to deposit into your account to begin?" +
                 "(Please enter whole numbers followed by a decimal point and two more numbers" +
-                "Example: ####.##");
-        float startingBalance = Float.parseFloat(accountCreate.nextLine());
+                "Example: ####.##)"));
 
         //The next 3 lines instantiate an Accounts object and set the Account_id
         //(also, they make an int and assign it to "bad").

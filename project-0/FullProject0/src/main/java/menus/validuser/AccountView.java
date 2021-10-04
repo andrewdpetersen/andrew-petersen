@@ -3,6 +3,7 @@ package menus.validuser;
 import DAOs.AccountsDAO;
 import models.Accounts;
 import models.Users;
+import utils.CallAndResponse;
 import utils.ConnectionManager;
 import utils.MyArrayList;
 import utils.formatValidation.CurrencyFormat;
@@ -17,7 +18,7 @@ import java.util.Scanner;
  * of Accounts instances, asks for a console input to select one of the instances and then
  * continues by using the input as an argument in the accountMenu method.
  */
-public interface AccountView extends CurrencyFormat {
+public interface AccountView extends CurrencyFormat, CallAndResponse {
     /**
      * The accountView method prints a series of Accounts instances, asks for a
      * console input to select one of the instances and then continues by using
@@ -53,8 +54,9 @@ public interface AccountView extends CurrencyFormat {
             }
 
             //Asks for console input
-            System.out.println("Which account would you like to view, please type the number inside the ():");
-            int chooseAccount = Integer.valueOf(accountScanner.nextLine());
+            int chooseAccount =
+                    Integer.valueOf(caller("Which account would you like to view," +
+                            "please type the number inside the ():"));
 
             //Checks if the input was one of the available accounts, and calls the accountMenu
             //method if the input was valid.

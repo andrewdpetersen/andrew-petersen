@@ -17,15 +17,12 @@ public class OuterMenu implements LoginMenu, NewUserMenu{
 
         //a control flow while loop that runs as long as the boolean "outer" is true.
         while (outer) {
-            Scanner menuScan = new Scanner(System.in);
-
-            System.out.print("########## OUTER PORTAL ##########\n" +
+            String outerInput = caller("########## OUTER PORTAL ##########\n" +
                     "(1) Returning User- Login\n" +
                     "(2) New User- Create Username\n" +
                     "(3) Quit- Exit\n" +
                     "##################################\n" +
                     "Please make a selection and press 'Enter':");
-            String outerInput = menuScan.nextLine();
 
             //a control flow switch based on the choice read by the scanner
             switch (outerInput) {
