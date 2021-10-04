@@ -18,7 +18,7 @@ public interface CurrencyFormat {
     default String betterConverter(float amount) throws ParseException {
 
         //This line instantiates a DecimalFormat object, "decimalFormat".
-        DecimalFormat decimalFormat = new DecimalFormat("#,###.##");
+        DecimalFormat decimalFormat = new DecimalFormat("#,###.00");
 
         //This line updates our instance, we will have commas in the format.
         decimalFormat.setGroupingUsed(true);
