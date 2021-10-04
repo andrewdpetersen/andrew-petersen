@@ -28,16 +28,19 @@ public interface BankMenu extends AccountView, AccountCreation{
             switch(bankSelection) {
                 case "1":
                     //calls the accountOverview method
+                    validUser = false;
                     new AccountOverview().accountOverview(user);
                     break;
 
                 case "2":
                     //calls the accountCreation method
+                    validUser = false;
                     accountCreation(user);
                     break;
 
                 case "3":
                     //calls the accountView method
+                    validUser = false;
                     accountView(user);
                     break;
 
