@@ -23,7 +23,7 @@ import java.util.Scanner;
  * requests input from the console. Using that input, it performs various functions
  * regarding transactions on the given account.
  */
-public class AccountMenu implements CurrencyFormat, BankMenu {
+public class AccountMenu implements CurrencyFormat, BankMenu, PrintOut {
 
     /**
      * The accountMenu method takes two parameters, a Users object, "user", and an int,
@@ -262,7 +262,7 @@ public class AccountMenu implements CurrencyFormat, BankMenu {
                     int i =0;
                     while(i<transactionHistory.size()){
                         if(transactionHistory.get(i)!=null){
-                            new PrintOut().printOut(transactionHistory.get(i));
+                            printOut(transactionHistory.get(i));
                         }
                         i++;
                     }

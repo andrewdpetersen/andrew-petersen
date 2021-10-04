@@ -1,5 +1,8 @@
 package utils;
 
+/**
+ * Boilerplate interface for MyArrayList class, with abstract methods to be overridden.
+ */
 public interface MyArrayListInterface<E> {
 
     //size()
