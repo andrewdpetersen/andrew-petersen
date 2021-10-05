@@ -276,6 +276,9 @@ public class AccountMenu implements CurrencyFormat, BankMenu, PrintOut {
                 //runs the OuterMenu method
                 new OuterMenu().OuterMenu(false);
                 break;
+            default:
+                System.out.println("Please make a valid selection");
+                break;
         }
     }
 }
