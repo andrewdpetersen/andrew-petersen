@@ -230,6 +230,10 @@ public class AccountMenu implements CurrencyFormat, BankMenu, PrintOut {
                     } else {
                         System.out.println("You cannot make a negative transfer");
                     }
+
+                    //runs the "accountMenu" method
+                    new AccountMenu().accountMenu(user,account_id);
+
                 }catch(SQLException|IOException e){
                     e.printStackTrace();
                 }
