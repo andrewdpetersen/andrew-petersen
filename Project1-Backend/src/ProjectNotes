@@ -1,0 +1,58 @@
+Begin Date: Thursday 10/7/2021
+Participants: Jason Wozniak, Andrew Petersen
+Instructor: Kyle Plummer
+
+Minimum Viable Product
+•    As a user, I can see all available flights from a city to a city.
+•    As a user, I can purchase one or more tickets on a flight.
+•    As a user, I can check in for my flight.
+•    As a user, I can cancel my ticket.
+•    As an administrator, I can schedule a new flight.
+•    As an administrator, I can cancel a flight.
+•    As an administrator, I can see all users with tickets for a flight.
+Bonus Stories
+•    As an administrator, I can cancel a ticket on any flight.
+•    As an pilot, I can initiate takeoff of a flight. (No more new tickets or cancellations)
+
+Minimum Requirements
+1.    Proper use of OOP principles
+2.    Output is presented to user on a web page, and input is accepted from a web form
+3.    Webapp(backend) and UI(frontend) are served from AWS and are publically available
+4.    CRUD operations are supported for one or more domain objects via the web application's API endpoints and invoked from the frontend
+5.    Communication is done with JSON in HTTP request and response bodies.
+6.    Abstract all JDBC away with Hibernate
+7.    Documentation (all classes and methods have adequate Javadoc comments)
+8.    All Exceptions are caught and logged to a file
+9.    80%+ Unit test coverage for service layer classes
+Bonus Features
+1.    DevOps CI/CD pipeline to build and deploy project
+2.    Advanced UI Framework (Angular or React)
+
+******************************** MENU OUTLINE ********************************
+
+Main Menu
+  Create New User
+  Login
+
+  New User
+    Enter: username, password
+    Create New person - people table
+
+  Login
+    Enter: username, password (checks database for acess level... validation)
+
+    User Portal
+      View All Flights ---> Click Buy ---> autoSends to BuyFlight and fills Flight_ID.. (backup add #tickets)
+      Buy Flight ---> Enter Flight_ID, # of tickets
+      Checkin ---> Enter ticket_ID ---> Confirmation, Main menu button
+      Cancel ----> Enter ticket_ID
+
+    Pilot Portal
+      Initiate Takeoff ---> Enter Flight_ID (blocks User.cancel, Admin.cancel, user.buy) maybe use a takeoff_flag
+
+    Admin Portal
+      Schedule New Flight ---> Select: Departure, Arrival,  Date, Time
+      Cancel Flight ---> View:  a list of all flights... RED CANCEL button...
+      View Manifest ---> View: a list of all flights > Manifest Button > Cancel User
+
+******************************** MENU OUTLINE END ********************************

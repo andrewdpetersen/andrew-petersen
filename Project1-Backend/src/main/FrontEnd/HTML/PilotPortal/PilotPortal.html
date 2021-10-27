@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <nav>
+        <a href="../UserPortal/UserPortal.html">| USER |</a>
+        <a href="./PilotPortal.html">| PILOT |</a>
+        <a href="../AdminPortal/AdminPortal.html">| ADMIN |</a>
+        <a href="../index.html">| LOGIN |</a>
+    </nav>
+    <link rel="stylesheet" href="../../CSS/stylish.css">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="background-color: lightgreen">
+<h2>Pilot Portal</h2>
+<img src="../img/PilotPortalGreenGlowMetal.png">
+<form action="POST" id="takeoff_lock">
+    <label for="flightID">Enter Flight ID:</label><br>
+    <input type="text" id="flightID" name="flightID"><br>
+    <label for="specialPin">Enter SPECIAL pin:</label><br>
+    <input type="password" id="specialPin" name="specialPin"><br><br>
+    <input type="submit" value="Takeoff LOCK">
+
+</form>
+<script src="../../JavaScript/PilotJS/pilotTakeoffLock.js"></script>
+
+</body>
+</html>

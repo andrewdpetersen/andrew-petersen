@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--web.xml is your deployment descriptor
+        this is how tomcat gathers information about your project, such as welcome files,
+            available servlets, how to handle errors and exceptions, and other various
+            configurations you may want tomcat to know about.
+    It belongs in src/main/webapp/WEB-INF/ directory
+-->
+<web-app
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://java.sun.com/xml/ns/javaee"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+        version="2.5">
+
+
+    <listener>
+        <listener-class>servlets.DependencyLoaderListener</listener-class>
+    </listener>
+
+    <servlet><!--TICKETS-->
+        <servlet-name>ServletTickets</servlet-name>
+        <servlet-class>servlets.ServletTickets</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ServletTickets</servlet-name>
+        <url-pattern>/tickets</url-pattern>
+    </servlet-mapping>
+
+    <servlet> <!--FLIGHTS-->
+        <servlet-name>ServletFlights</servlet-name>
+        <servlet-class>servlets.ServletFlights</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ServletFlights</servlet-name>
+        <url-pattern>/flights</url-pattern>
+    </servlet-mapping>
+
+    <servlet> <!--PEOPLE-->
+        <servlet-name>ServletPeople</servlet-name>
+        <servlet-class>servlets.ServletPeople</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ServletPeople</servlet-name>
+        <url-pattern>/people</url-pattern>
+    </servlet-mapping>
+
+    <!-- CORS FILTER -->
+    <filter>
+        <filter-name>CorsFilter</filter-name>
+        <filter-class>servlets.CORSFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>CorsFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!-- /CORS FILTER -->
+
+</web-app>

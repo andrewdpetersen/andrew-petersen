@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../CSS/stylish.css">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <nav>
+        <a href="../UserPortal/UserPortal.html">| USER |</a>
+        <a href="../PilotPortal/PilotPortal.html">| PILOT |</a>
+        <a href="./AdminPortal.html">| ADMIN |</a>
+        <a href="../index.html">| LOGIN |</a>
+    </nav>
+</head>
+<body style="background-color: darkred" class="admin">
+<img src="../img/AdminPortalDippedRed.png"><br><br><br>
+
+<h2><<<<-- CANCEL FLIGHT -->>></h2><br><br>
+
+<form id="cancel_flight">
+    <label for="cancel_flightID">Fight ID:</label><br>
+    <input type="text" id="cancel_flightID" name="cancel_flightID" value=""><br>
+    <input type="submit" value="Cancel"><input type="submit" value="View"> <!--ADD VIEW FUNCTION JavaScript-->
+    <input type="image" src="../img/CancelButton.png" name="cancel" width="100" height="48" alt="cancel"/>
+</form>
+
+<h2><<<<-- ADD FLIGHT -->>></h2>
+
+<form id="add_flight"><br><br>
+    <label for="departureCity">Departure City</label><br>
+    <select name = "departureCity" id="departureCity">
+        <option value=NewYork>New York, NY</option>
+        <option value=LosAngeles>Los Angeles, CA</option>
+        <option value=Chicago>Chicago, IL</option>
+        <option value=Houston>Houston, TX</option>
+        <option value=Phoenix>Phoenix, AZ</option>
+        <option value=Philadelphia>Philadelphia, PA</option>
+        <option value=SanAntonio>San Antonio, TX</option>
+        <option value=SanDiego>San Diego, CA</option>
+        <option value=Dallas>Dallas, TX</option>
+        <option value=SanJose>San Jose, CA</option>
+        <option value=Portland>Portland, OR</option>
+        <option value=CedarRapids>Cedar Rapids, IA</option>
+    </select>
+
+    <label for="arrivalCity">Arrival City:</label><br>
+    <select name = "arrivalCity" id="arrivalCity">
+        <option value=NewYork>New York, NY</option>
+        <option value=LosAngeles>Los Angeles, CA</option>
+        <option value=Chicago>Chicago, IL</option>
+        <option value=Houston>Houston, TX</option>
+        <option value=Phoenix>Phoenix, AZ</option>
+        <option value=Philadelphia>Philadelphia, PA</option>
+        <option value=SanAntonio>San Antonio, TX</option>
+        <option value=SanDiego>San Diego, CA</option>
+        <option value=Dallas>Dallas, TX</option>
+        <option value=SanJose>San Jose, CA</option>
+        <option value=Portland>Portland, OR</option>
+        <option value=CedarRapids>Cedar Rapids, IA</option>
+    </select>
+    <label for="flightDate">Date:</label><br>
+
+    <input type="text" id="flightDate" name="flightDate" value=""><br>
+    <label for="flightTime">Time:</label><br>
+    <input type="text" id="flightTime" name="flightTime" value=""><br><br>
+    <input type="submit" value="GO"><button img="../img/CancelButton.png">NEW BUTTON</button>
+
+</form>
+
+<h2><<<<-- FLIGHT MANIFEST -->>></h2>
+
+<form id="admin_flight_manifest">
+    <label for="manifest_flightID">Fight ID:</label><br>
+    <input type="text" id="manifest_flightID" name="manifest_flightID"><br>
+    <input type="submit" value="VIEW"> <!--ADD VIEW FUNCTION  ====> send to ADMIN_MANIFEST.html-->
+</form>
+
+<script src="../../JavaScript/AdminJS/adminPortalCancelFlight.js"></script>
+<script src="../../JavaScript/AdminJS/adminPortalAddFlight.js"></script>
+<script src="../../JavaScript/AdminJS/adminPortalFlightManifest.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+.red {
+   color: red;
+}
+.thick { /* class="thick" */
+   font-size:20px;
+}
+.green { /* sets the class = "green" to have this style, multiple classes OK */
+   color:green; /* text color */
+}
+.admin{ /* sets the class="admin" to have this style */
+    background-color:red;
+}
+#test{ /* sets the id="test" to have this style */
+    color:red;
+}
+.pilot{
+    background-color:lightgreen;
+}
+.user{
+    background-color:lightblue;
+}
+.button{
+
+}
+.dragon{
+    /*font-family: Brush Script MT; */
+    /*font-family: Monaco; */
+    font-family: Fantasy;
+    color:lightblue;
+}
+h1{
+font-size: 50px;
+}
+
+h6{
+font-size: 7px;
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <h6><a href="../index.html">LOGOUT</a></h6>
+    <nav>
+        <a href="./UserPortal.html">| USER |</a>
+        <a href="../PilotPortal/PilotPortal.html">| PILOT |</a>
+        <a href="../AdminPortal/AdminPortal.html">| ADMIN |</a>
+        <a href="../index.html">| LOGIN |</a>
+    </nav>
+    <link rel="stylesheet" href="../../CSS/stylish.css">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body  class="user">
+<img src="../img/CustomerPortalBlueGlowMetal.png"><br>
+
+<h2>***** USER PURCHASE TICKETS *****</h2>
+<form id="user_purchase_tickets">
+    <label for="numberOfTickets">Enter Number of Tickets:</label>
+    <input type="number" id="numberOfTickets" name="numberOfTickets">
+    <label for="userFlightID">Enter Flight Number:</label>
+    <input type="number" id="userFlightID" name="userFlightID">
+    <button type="submit">PURCHASE</button>
+</form>
+
+<h2>***** USER CHECKIN TICKETS *****</h2>
+<form id="user_checkin">
+    <label for="checkin_ticket_id">Enter Ticket Number:</label>
+    <input type="number" id="checkin_ticket_id" name="checkin_ticket_id">
+    <button type="submit">CHECKIN</button>
+</form>
+
+<h2>***** USER CANCEL TICKETS *****</h2>
+<form id="user_cancel_tickets">
+    <label for="user_cancel_ticket_id">Enter Ticket Number:</label><br>
+    <input type="text" id="user_cancel_ticket_id" name="user_cancel_ticket_id" placeholder="EnterTicketNumber">
+    <input type="submit" value="CANCEL">
+</form><br>
+
+<h2>***** USER VIEW AVAILABLE FLIGHTS *****</h2>
+<form id="user_view_flights">
+    <label for="select_departureCity">Departure City</label><br>
+    <select name = "select_departureCity" id="select_departureCity">
+        <option value=NewYork>New York, NY</option>
+        <option value=LosAngeles>Los Angeles, CA</option>
+        <option value=Chicago>Chicago, IL</option>
+        <option value=Houston>Houston, TX</option>
+        <option value=Phoenix>Phoenix, AZ</option>
+        <option value=Philadelphia>Philadelphia, PA</option>
+        <option value=SanAntonio>San Antonio, TX</option>
+        <option value=SanDiego>San Diego, CA</option>
+        <option value=Dallas>Dallas, TX</option>
+        <option value=SanJose>San Jose, CA</option>
+        <option value=Portland>Portland, OR</option>
+        <option value=CedarRapids>Cedar Rapids, IA</option>
+    </select><br><br>
+
+    <label for="select_arrivalCity">Arrival City:</label><br>
+    <select name = "select_arrivalCity" id="select_arrivalCity">
+        <option value=NewYork>New York, NY</option>
+        <option value=LosAngeles>Los Angeles, CA</option>
+        <option value=Chicago>Chicago, IL</option>
+        <option value=Houston>Houston, TX</option>
+        <option value=Phoenix>Phoenix, AZ</option>
+        <option value=Philadelphia>Philadelphia, PA</option>
+        <option value=SanAntonio>San Antonio, TX</option>
+        <option value=SanDiego>San Diego, CA</option>
+        <option value=Dallas>Dallas, TX</option>
+        <option value=SanJose>San Jose, CA</option>
+        <option value=Portland>Portland, OR</option>
+        <option value=CedarRapids>Cedar Rapids, IA</option>
+    </select>
+    <input type="submit" value="VIEW">
+</form>
+<script src="../../JavaScript/UserJS/userPortalBuyTicket.js"></script>
+<script src="../../JavaScript/UserJS/userPortalCheckin.js"></script>
+<script src="../../JavaScript/UserJS/userPortalCancelTicket.js"></script>
+<script src="../../JavaScript/UserJS/userPortalViewFlights.js"></script>
+</body>
+</html>
